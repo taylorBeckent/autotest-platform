@@ -4,7 +4,7 @@ import { Spin } from 'antd';
 import styles from './index.less';
 import HeaderBar from './headerBar';
 import TitleContent from './titleContent';
-import HttpRequestPage from './HttpRequestPage';
+import HttpRequestPage from './httpRequestPage';
 import utils from '../../scriptManagement/utils';
 import { NodeTypeMap, NodeTypeReverseMap } from '@/pages/controller/common';
 

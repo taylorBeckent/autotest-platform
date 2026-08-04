@@ -5,7 +5,7 @@ import styles from './index.less';
 import StepTree from './stepTree';
 import HeaderBar from './headerBar';
 import TitleContent from './titleContent';
-import HttpRequestPage from './HttpRequestPage';
+import HttpRequestPage from './httpRequestPage';
 import CommonVariables from './commonVariables';
 import WaitControl from './waitControl';
 import StepTreeDriven from './stepTreeDriven';
