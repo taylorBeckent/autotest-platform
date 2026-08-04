@@ -1,0 +1,372 @@
+.container {
+    /* width: 32%; */
+    width: 100%;
+    height: 600px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+    border-right: 2px dashed #dee2e6;
+    transition: border-color 0.3s;
+    font-size: 14px;
+    overflow: auto;
+}
+
+.container:hover {
+    border-color: #adb5bd;
+}
+
+.container::-webkit-scrollbar {
+    width: 10px;
+    height: 6px;
+}
+
+.container::-webkit-scrollbar-track {
+    border-radius: 3px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background: rgba(135, 130, 130, .2);
+    border-radius: 3px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background: rgba(135, 130, 130, .6);
+    border-radius: 3px;
+}
+
+.draggable-item {
+    display: flex;
+    white-space: nowrap;
+    align-items: flex-start;
+    position: relative;
+    background-color: transparent;
+    border-radius: 8px;
+    width: 100%;
+}
+
+
+.drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    min-height: 36px;
+    user-select: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: move;
+}
+
+.draggable-item:hover > .drag-handle {
+    opacity: 1;
+}
+
+.draggable-item .draggable-item:hover > .drag-handle {
+    opacity: 1;
+}
+
+.drag-handle:hover {
+    opacity: 1 !important;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+
+.step-node-preview {
+    flex: 1;
+    width: calc(100% - 20px);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.item-content {
+    min-height: 34px;
+    padding-right: 10px;
+    padding-left: 10px;
+    gap: 3px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: #5657580a;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+}
+
+.item-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(65, 158, 254, 0.3);
+    background: #f5f5f5;
+}
+
+.item-content.active {
+    border: 1px solid rgba(65, 158, 254, 0.6);
+    background: rgba(65, 158, 254, 0.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.node-content {
+    flex: 1;
+    margin: 0 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    padding: 4px 0;
+    color: #262626;
+    font-size: 14px;
+}
+
+
+.action-icon {
+    display: none;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.item-content:hover > .action-icon {
+    display: flex;
+    white-space: nowrap;
+}
+
+.action-icon .ant-btn {
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.action-icon .ant-btn:hover {
+    background: rgba(65, 158, 254, 0.1);
+}
+
+
+.sub-step-node {
+    margin-top: 8px;
+    padding-left: 32p;
+    position: relative;
+}
+
+/* 子节点连接线 */
+.sub-step-node::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, 
+    transparent 0%,
+    rgba(86, 87, 88, 0.08) 10%,
+    rgba(86, 87, 88, 0.08) 90%,
+    transparent 100%);
+}
+
+.case-step-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+}
+
+
+.draggable-item .draggable-item {
+    margin-left:  0;
+    border-left: none;
+}
+
+.draggable-item .draggable-item .step-node-preview {
+    position: relative;
+}
+
+/* 连接点 */
+.draggable-item .draggable-item .step-node-preview::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #419efe;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+
+.dragging {
+    opacity: 0.5;
+}
+
+.dragging .item-content {
+    box-shadow: 0 0 0 2px rgba(65, 158, 254, 0.3);
+    background: rgba(65, 158, 254, 0.05);
+}
+
+
+.drop-indicator {
+    position: absolute;
+    background-color: #419efe;
+    z-index: 10;
+    pointer-events: none;
+    border-radius: 2px;
+    left: 40px;
+    right: 0;
+    height: 3px;
+    animation: pulse 0.5s infinite alternate;
+    box-shadow: 0 0 5px rgba(65, 158, 254, 0.5);
+}
+
+.drop-indicator.before {
+    top: -1px;
+}
+
+.drop-indicator.after {
+    bottom: -1px;
+}
+
+@keyframes pulse {
+    from {
+        opacity: 0.5;
+        transform: scaleX(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+
+.item-content.is-open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 1px solid transparent;
+}
+
+.step-node-preview .item-content.is-open + .sub-step-node {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border: 1px solid rgba(86, 87, 88, 0.04);
+    background:  rgba(86, 87, 88, 0.02);
+    margin-top: -1px;
+    padding: 16px;
+}
+
+.step-node-preview .item-content.is-open + .sub-step-node.active {
+    border: 1px solid rgba(65, 158, 254, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(65, 158, 254, 0.1);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.add-step {
+    display: flex;
+}
+
+/* .add-step > .ant-btn {
+    flex: 1;
+} */
+
+.add-step {
+    :global {
+        .ant-btn {
+            flex: 1;
+        }
+    }
+}
+
+.batch-menu {
+    :global {
+        .ant-upload.ant-upload-select {
+            display: inherit;
+        }
+
+        .ant-btn {
+            display: flex;
+            justify-content: flex-start;
+        }
+    }
+}
+
+
+.draggable-item.no-drop .drag-handle {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.draggable-item.no-drop .drag-handle:hover {
+    opacity: 0.3 !important;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+        gap: 12px
+    }
+
+    .item-content {
+        padding: 12px;
+        min-height: 56px;
+    }
+
+    .node-content {
+        margin: 0 8px;
+        font-size: 13px;
+    }
+
+    .sub-step-node {
+        padding-left: 24px;
+    }
+
+    .sub-step-node::before {
+        left: 12px;
+    }
+
+    .draggable-item .draggable-item .step-node-preview::before {
+        left: -12px;
+    }
+
+    .drop-indicator {
+        left: 30px;
+    }
+
+    .drag-handle {
+        min-height: 56px;
+        padding-top: 12px;
+    }
+}

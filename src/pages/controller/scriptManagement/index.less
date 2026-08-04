@@ -1,0 +1,77 @@
+.content {
+    width: 100%;
+    height: calc(100% - 48px);
+    display: flex;
+    justify-content: space-between;
+
+    :global {
+        .ant-badge-status-dot {
+            width: 5px;
+            height: 5px;
+        }
+    }
+}
+
+.left-side {
+    width: 16%;
+    height: 100%;
+    // border: 1px dashed;
+    min-height: 100px;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.right-side {
+    width: 100%;
+    height: 100%;
+}
+
+.tag-category {
+    border: 1px solid #cbcdce;
+    padding: 10px;
+    margin: 2px 0;
+}
+
+.category-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.empty-tag {
+    border: 1px solid #cbcdce;
+    padding: 10px;
+    margin: 2px 0;
+    height: 100px;
+    color: #c3bdbd;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.tips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 70px;
+
+    div {
+        margin-right: 8px;
+        color: #a0a0a0;
+    }
+    
+    :global {
+        
+
+        .ant-badge-status-text {
+            color: #a0a0a0;
+        }
+    }
+}
+
+
+.data-scene-select {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 10px 0 0;
+}

@@ -1,0 +1,108 @@
+@import '~antd/es/style/themes/default.less';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.right {
+  min-width: 20px;
+  max-width: 80%;
+  float: right;
+  color: #11111185;
+  padding: 10px;
+  background-color: #1890ff1c;
+  // text-align: right;
+  overflow-wrap: break-word;
+}
+
+.left {
+  // text-align: right;
+  min-width: 20px;
+  width: 80%;
+  color: #11111185;
+  padding: 10px;
+  overflow-wrap: break-word;
+  background-color: #f0f2f5;
+  white-space: pre-wrap;
+  // position: relative;
+  // min-height: 20px;
+  // white-space:pre-wrap
+}
+
+
+.DrawerFlow {
+  :global {
+    .ant-drawer-content {
+      overflow: hidden;
+    }
+
+    .ant-drawer-body {
+      overflow: hidden;
+    }
+  }
+}
+
+@media (max-width: @screen-xs) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+
+    &-thead>tr,
+    &-tbody>tr {
+
+      >th,
+      >td {
+        white-space: pre;
+
+        >span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+// 兼容IE11
+@media screen and(-ms-high-contrast: active),
+(-ms-high-contrast: none) {
+  body .ant-design-pro>.ant-layout {
+    min-height: 100vh;
+  }
+}
+
+
+.editingBox {
+  background: rgb(0, 255, 0) !important;
+
+  :global {
+    .ant-form-item {
+      background: #000;
+      margin-bottom: 0px !important;
+    }
+  }
+}

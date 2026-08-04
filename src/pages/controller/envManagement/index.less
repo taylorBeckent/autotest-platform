@@ -1,0 +1,30 @@
+.btchBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    :global {
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+          }
+        
+        ::-webkit-scrollbar-track {
+            background: #eaeaea;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #b5b3b3;
+            border-radius: 3px;
+        }
+    }
+}
+
+.tableContent {
+    min-height: 220px;
+    max-height: 600px;
+    overflow-y: auto;
+}

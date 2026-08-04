@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>代码差异报告</title>
+        <style>
+            body { margin: 0; overflow: hidden; font-family: sans-serif; }
+            #editor-container {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .report-header {
+                padding: 10px 20px;
+                background: #f3f3f3;
+                border-bottom: 1px solid #ccc;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="report-header">
+            <strong>代码差异报告</strong>
+            <span style="margin-left: 20px; color: #888;">生成时间：${new Date().toLocalString()}</span>
+        </div>
+        <div id="editor-container"></div>
+
+        <!-- 从 12服务器 加载编辑器  -->
+        <!-- <script src="http://10.208.24.12:8518/static/monaco/min/vs/loader.js"><\/script> -->
+        <script>
+            //  配置并加载 Monaco Editor
+            require.config({
+                paths: {
+                    'vs': 'http://10.208.24.12:8518/static/monaco/min/vs'
+                }
+            });
+
+            require(['vs/editor/editor.main'], function() {
+                // 创建 DiffEditor
+                const diffEditor = monaco.editor.createDiffEditor(
+                    document.getElementById('editor-container'),
+                    {
+                        wordWrap: 'on',
+                        scrollbar: {
+                            vertical: 'visible',
+                        }
+                    }
+                )
+            })
+
+            // const originalModel = monaco.editor.createModel(${JSON.stringify(originalText)}, 'text');
+            // const modifiedModel = monaco.editor.createModel(${JSON.stringify(modifiedText)}, 'text');
+
+            diffEditor.setModel({
+                original: 'originalModel',
+                modified: 'modifiedModel'
+            })
+
+            window.addEventListener('resize', () => {
+                diffEditor.layout();
+            })
+        </script>
+    </body>
+</html>

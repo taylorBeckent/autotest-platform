@@ -1,0 +1,58 @@
+.liBg:hover {
+    background-color: rgb(237, 238, 238);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.tabBadge {
+    display: inline-block;
+    margin-left: 6px;
+    background: rgb(207, 206, 206);
+    color: #1f2937;
+    font-size: 12px;
+    padding: 0 6px;
+    border-radius: 6px;
+}
+
+.customTabs {
+    :global {
+        // .ant-tabs-nav-wrap {
+        //     background: #828283;
+        // }
+        .ant-tabs-nav {
+            background: #fff;
+            padding: 4px;
+            border-radius: 8px 8px 0 0;
+        }
+        .ant-tabs-tab {
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 6px;
+            background: transparent;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .ant-tabs-tab-btn {
+            color: #1f2937;
+        }
+        .ant-tabs-tab:hover {
+            background: rgba(22, 119, 255, 0.08);
+            color: #1f2937;
+        }
+        .ant-tabs-tab-active {
+            background: #fff;
+            border-color: #d1d5db;
+            color: #1f2937;
+            font-weight: 600;
+        }
+        .ant-tabs-ink-bar {
+            height: 3px;
+            border-radius: 6px;
+            background: #1f2937;
+        }
+    }
+}
+
+.customTabFont {
+    color: #1f2937;
+}
