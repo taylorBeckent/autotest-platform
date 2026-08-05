@@ -39,7 +39,7 @@ export function getEffectiveApp(params) {
 
 //. 应用查询
 export function queryEnvApps(params) {
-    return request(`database/lxd/getallApp?${stringify(params)}`, {
+    return request(`database/yk/autotest/env/getallApp?${stringify(params)}`, {
         method: 'GET',
         data: params,
     });
@@ -113,7 +113,7 @@ export function envSearch(params) {
 //. 环境查询 -- 新接口（去重）
 export function getEnvNames(params) {
     // return request(`/database/yk/autotest/env/get_env_names?${stringify(params)}`, {
-    return request(`/database/lxd/list`, {
+    return request(`/database/yk/autotest/env/list`, {
         method: 'POST',
         data: params
     })
@@ -194,7 +194,7 @@ export function uploadCreate(params) {
 
 //. 变量函数查询
 export function sessionVariables(params) {
-    return request(`/database/zzt/autoapitool/case/session_variables?${stringify(params)}`, {
+    return request(`/database/yk/autotest/tool/get?${stringify(params)}`, {
         method: 'GET',
         data: params
     })
@@ -211,7 +211,7 @@ export function deleteSource(params) {
 
 //. 查询全量配置
 export function getConfigNames(params) {
-    return request(`/database/yk/autotest/env/get_config_names?${stringify(params)}`, {
+    return request(`/database/yk/autotest/config/config_names?${stringify(params)}`, {
         method: 'GET',
         requestType: 'form',
         data: params

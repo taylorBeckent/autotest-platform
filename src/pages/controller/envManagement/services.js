@@ -50,7 +50,7 @@ export function updateEnv(params) {
 //.查询环境下拉框
 export function queryEnvList(params) {
     // return request('database/zzt/autoapitool/env/get_env_names', {
-    return request(`/database/lxd/list`, {
+    return request(`/database/yk/autotest/env/list`, {
         method: 'POST',
         data: params,
     });
@@ -70,7 +70,7 @@ export function projectCreate(params) {
 
 //. 应用查询
 export function getAllApp(params) {
-    return request(`database/lxd/getallApp?${stringify(params)}`, {
+    return request(`database/yk/autotest/env/getallApp?${stringify(params)}`, {
         method: 'GET',
         data: params,
     });
