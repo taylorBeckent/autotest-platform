@@ -70,7 +70,7 @@ export function projectCreate(params) {
 
 //. 应用查询
 export function getAllApp(params) {
-    return request(`database/yk/autotest/env/getallApp?${stringify(params)}`, {
+    return request(`database/yk/autotest/env/get_all_app?${stringify(params)}`, {
         method: 'GET',
         data: params,
     });
@@ -78,7 +78,7 @@ export function getAllApp(params) {
 
 //. 环境查询 - 母表
 export function searchList(params) {
-    return request(`database/lxd/search/list?${stringify(params)}`, {
+    return request(`database//yk/autotest/env/page?${stringify(params)}`, {
         method: 'GET',
         data: params,
     });
@@ -86,7 +86,7 @@ export function searchList(params) {
 
 //. 环境新增 - 母表
 export function envAdd(params) {
-    return request('database/lxd/env/add', {
+    return request('database/yk/autotest/env/create', {
         method: 'POST',
         data: params,
     });
@@ -94,7 +94,7 @@ export function envAdd(params) {
 
 //. 环境编辑 - 母表
 export function envUpdate(params) {
-    return request('database/lxd/env/update', {
+    return request('database/yk/autotest/env/update', {
         method: 'POST',
         data: params,
     });
@@ -102,7 +102,7 @@ export function envUpdate(params) {
 
 //. 环境删除 - 母表
 export function envDelete(params) {
-    return request('database/lxd/env/delete', {
+    return request('database/yk/autotest/env/delete', {
         method: 'POST',
         data: params,
     });
@@ -110,7 +110,7 @@ export function envDelete(params) {
 
 //. 新增子表 - APP
 export function appAdd(params) {
-    return request('database/lxd/app/add', {
+    return request('database/yk/autotest/config/app/create', {
         method: 'POST',
         data: params,
     });
@@ -118,7 +118,7 @@ export function appAdd(params) {
 
 //. 新增子表 - File
 export function fileAdd(params) {
-    return request('database/lxd/file/add', {
+    return request('database/yk/autotest/config/file/create', {
         method: 'POST',
         data: params,
     });
@@ -126,7 +126,7 @@ export function fileAdd(params) {
 
 //. 新增子表 - DB
 export function dbAdd(params) {
-    return request('database/lxd/db/add', {
+    return request('database/yk/autotest/config/database/create', {
         method: 'POST',
         data: params,
     });
@@ -134,7 +134,7 @@ export function dbAdd(params) {
 
 //. 子表查询
 export function searchConfigList(params) {
-    return request(`database/lxd/config/list?${stringify(params)}`, {
+    return request(`database//yk/autotest/config/list?${stringify(params)}`, {
         method: 'GET',
         data: params,
     });
@@ -142,7 +142,7 @@ export function searchConfigList(params) {
 
 //. 编辑子表 - APP
 export function appUpdate(params) {
-    return request('database/lxd/app/update', {
+    return request('database/yk/autotest/config/app/update', {
         method: 'POST',
         data: params,
     });
@@ -150,7 +150,7 @@ export function appUpdate(params) {
 
 //. 编辑子表 - File
 export function fileUpdate(params) {
-    return request('database/lxd/file/update', {
+    return request('database/yk/autotest/config/file/update', {
         method: 'POST',
         data: params,
     });
@@ -158,7 +158,7 @@ export function fileUpdate(params) {
 
 //. 编辑子表 - DB
 export function dbUpdate(params) {
-    return request('database/lxd/db/update', {
+    return request('database/yk/autotest/config/db/update', {
         method: 'POST',
         data: params,
     });
@@ -166,7 +166,7 @@ export function dbUpdate(params) {
 
 //. 删除子表
 export function configDelete(params) {
-    return request('database/lxd/config/delete', {
+    return request('database/yk/autotest/config/delete', {
         method: 'POST',
         data: params,
     });
@@ -174,7 +174,7 @@ export function configDelete(params) {
 
 //. 数据库连接测试
 export function dbTestConnection(params) {
-    return request('database/lxd/db/tests-connection', {
+    return request('database/yk/autotest/config/database/test_connection', {
         method: 'POST',
         data: params,
     });

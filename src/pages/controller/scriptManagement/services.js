@@ -39,7 +39,7 @@ export function getEffectiveApp(params) {
 
 //. 应用查询
 export function queryEnvApps(params) {
-    return request(`database/yk/autotest/env/getallApp?${stringify(params)}`, {
+    return request(`database/yk/autotest/env/get_all_app?${stringify(params)}`, {
         method: 'GET',
         data: params,
     });
@@ -47,7 +47,7 @@ export function queryEnvApps(params) {
 
 // 
 export function queryEnvAppsChildConfig(params) {
-    return request(`database/lxd/config/list?${stringify(params)}`, {
+    return request(`database//yk/autotest/config/list?${stringify(params)}`, {
         method: 'GET',
         data: params,
     });
@@ -55,7 +55,7 @@ export function queryEnvAppsChildConfig(params) {
 
 // 根据project_id查询
 export function queryEnvAppsWithProjectId(params) {
-    return request(`database/lxd/search/list?${stringify(params)}`, {
+    return request(`database//yk/autotest/env/page?${stringify(params)}`, {
         method: 'GET',
         data: params,
     })
