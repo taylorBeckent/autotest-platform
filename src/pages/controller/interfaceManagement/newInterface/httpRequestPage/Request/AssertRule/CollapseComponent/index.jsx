@@ -22,17 +22,18 @@ const AssertCollapse = (props) => {
     const [assertSelect, setAssertSelect] = useState(); //. 断言选中
     const [assertVal, setAssertVal] = useState(); //. 断言内容
 
-    const sourceOption = [ ...SourceOption ];
+    const sourceOption = [...SourceOption];
 
-    const assertType = [ ...AssertType ];
+    const assertType = [...AssertType];
 
     useEffect(() => {
-        setNameVal(currentData?.name);
-        setSourceVal(currentData?.source);
-        setExpressionVal(currentData?.expr);
-        setAssertSelect(currentData?.operation);
-        setAssertVal(currentData?.except_value);
-        form.setFieldsValue({ 'name': currentData?.name, 'source': currentData?.source, 'expr': currentData?.expr, })
+        console.log(currentData);
+        setNameVal(currentData?.name || undefined);
+        setSourceVal(currentData?.source || undefined);
+        setExpressionVal(currentData?.expr || undefined);
+        setAssertSelect(currentData?.operation || undefined);
+        setAssertVal(currentData?.except_value || undefined);
+        form.setFieldsValue({ 'name': currentData?.name  || undefined, 'source': currentData?.source  || undefined, 'expr': currentData?.expr  || undefined, })
     }, []);
 
     const HeaderRender = () => {
@@ -67,7 +68,7 @@ const AssertCollapse = (props) => {
                         </Form.Item>
 
                         <Form.Item labelCol={{ span: 6 }} wrapperCo={{ span: 16 }} label="断言对象" name="source"
-                            // initialValue="Response Text"
+                        // initialValue="Response Text"
                         >
                             <Select
                                 value={sourceVal}
@@ -75,7 +76,7 @@ const AssertCollapse = (props) => {
                                     setSourceVal(e);
                                     updateCurrentData('source', e);
                                 }}
-                                placeholder="请先选择断言对象"
+                                placeholder="断言对象"
                             >
                                 {sourceOption.map(item => (
                                     <Option key={item} value={item}>{item}</Option>
@@ -83,7 +84,7 @@ const AssertCollapse = (props) => {
                             </Select>
                         </Form.Item>
 
-                        <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="提取表达式" name="expr" >
+                        <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="断言表达式" name="expr" >
                             <Input value={expressionVal} onChange={(e) => setExpressionVal(e.target.value)}
                                 onBlur={() => updateCurrentData('expr', expressionVal)}
                                 placeholder="断言表达式"
@@ -96,14 +97,14 @@ const AssertCollapse = (props) => {
                                 <Select
                                     value={assertSelect}
                                     onChange={e => { setAssertSelect(e); updateCurrentData('operation', e) }}
-                                    placeholder="断言类型"
+                                    placeholder="匹配规则"
                                     style={{ width: '50%' }}
                                 >
                                     {assertType.map(item => (
                                         <Option key={item} value={item}>{item}</Option>
                                     ))}
                                 </Select>
-                                <Input value={assertVal} onChange={e => { setAssertVal(e.target.value); updateCurrentData('except_value', e.target.value) }} placeholder="断言内容" style={{ width: '50%' }} />
+                                <Input value={assertVal} onChange={e => { setAssertVal(e.target.value); updateCurrentData('except_value', e.target.value) }} placeholder="预期值" style={{ width: '50%' }} />
                             </div>
                         </Form.Item>
                     </Form>

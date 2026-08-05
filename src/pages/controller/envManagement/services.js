@@ -158,7 +158,7 @@ export function fileUpdate(params) {
 
 //. 编辑子表 - DB
 export function dbUpdate(params) {
-    return request('database/yk/autotest/config/db/update', {
+    return request('database/yk/autotest/config/database/update', {
         method: 'POST',
         data: params,
     });

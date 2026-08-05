@@ -47,8 +47,13 @@ const TreeHandle = (props) => {
     ];
 
     const DropItemPublic = [
+        { key: '复制脚本/接口', label: (<div onClick={() => { setAddModalStatus('copy') }} >复制脚本/接口</div>) },
         { key: 'HTTP请求', label: (<div onClick={() => { handleAddNode(2, null, 0, []) }} >HTTP请求</div>) },
-        { key: '等待控制', label: (<div onClick={() => { handleAddNode(3, null, 0, []) }} >等待控制</div>) }
+        { key: 'TCP请求', label: (<div onClick={() => { handleAddNode(4, null, 0, []) }} >TCP请求</div>) },
+        { key: '等待控制', label: (<div onClick={() => { handleAddNode(3, null, 0, []) }} >等待控制</div>) },
+        { key: '数据库请求', label: (<div onClick={() => { handleAddNode(5, null, 0, []) }} >数据库操作</div>) },
+        { key: '代码请求(Python)', label: (<div onClick={() => { handleAddNode(6, null, 0, []) }} >Python代码</div>) },
+        { key: '报文比对', label: (<div onClick={() => { handleAddNode(9, null, 0, []) }} >报文比对</div>) },
     ];
 
     useEffect(() => {

@@ -15,7 +15,7 @@ const StepRequests = () => {
                     <TabPane tab="Code" key="stepRequestCode">
                         <CodeBody />
                     </TabPane>
-                    <TabPane tab="断言规则" key="stepAssert">
+                    <TabPane tab="断言" key="stepAssert">
                         <StepAssertRule />
                     </TabPane>
                 </Tabs>

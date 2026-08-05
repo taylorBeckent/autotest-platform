@@ -3,7 +3,7 @@ import { Button, Tag, Space, Row, Col } from 'antd';
 import styles from './index.less';
 import { parseStepType, parseStepEnv } from '@/pages/controller/scriptManagement/component/utils.js';
 
-const StepItem = ({stepDatas, onSelectRow, onTransferStatus, rightDisplay}) => {
+const StepItem = ({ stepDatas, onSelectRow, onTransferStatus, rightDisplay }) => {
     const [activeIndex, setActiveIndex] = useState("");
     const [itemDisplayEnv, setItemDisplayEnv] = useState(false);
 
@@ -48,12 +48,13 @@ const StepItem = ({stepDatas, onSelectRow, onTransferStatus, rightDisplay}) => {
 
             const url = urlMatch ? urlMatch[1] : '';
             const elapsed = stepItem.response_elapsed > 1 ? `${stepItem.response_elapsed}s` : `${stepItem.response_elapsed * 1000}ms`;
-            return {status: status.trim(), method: stepItem.request_method, url: url.trim(), elapsed: elapsed, stepType: stepItem.step_type };
+            return { status: status.trim(), method: stepItem.request_method, url: url.trim(), elapsed: elapsed, stepType: stepItem.step_type };
         }
-        return {status: stepItem?.step_state ? '200' : '400', method: null, url: null, elapsed: `${stepItem.step_elapsed * 1000}ms`, stepType: stepItem.step_type };
+        return { status: stepItem?.step_state ? '200' : '400', method: null, url: null, elapsed: `${stepItem.step_elapsed * 1000}ms`, stepType: stepItem.step_type };
     }
 
     function methodColor(method) {
+        if (!method) return;
         switch (method.toUpperCase()) {
             case 'POST':
                 return 'green';
@@ -82,10 +83,10 @@ const StepItem = ({stepDatas, onSelectRow, onTransferStatus, rightDisplay}) => {
                     style={{ marginBottom: 6, borderRadius: 4, backgroundColor: item.step_code === activeIndex ? '#e3e5e9' : '' }}
                     className={styles.liBg}
                     onClick={() => setActiveIndex(item.step_code)}
-                    >
+                >
                     <Button
                         type='text'
-                        style={{ 
+                        style={{
                             width: '100%',
                             height: '56',
                             fontSize: 16,
@@ -96,7 +97,7 @@ const StepItem = ({stepDatas, onSelectRow, onTransferStatus, rightDisplay}) => {
                             borderRadius: 8,
                             // borderBottom: '1px solid gray'
                         }}
-                        onClick={() => {onSelectRow(item); onTransferStatus(reqStatus); setItemDisplayEnv(true);}}
+                        onClick={() => { onSelectRow(item); onTransferStatus(reqStatus); setItemDisplayEnv(true); }}
                     >
                         <Row style={{ width: '100%' }}>
                             <Col span={17} flex='auto' style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -104,8 +105,8 @@ const StepItem = ({stepDatas, onSelectRow, onTransferStatus, rightDisplay}) => {
                                     <Tag color={tagContent.color}>{tagContent.tag}</Tag>
                                     <span>{item.step_name} </span>
                                     {curStepType == 2 && <>
-                                    <span style={{ color: methodColor(reqStatus.method), fontSize: 12}}>{reqStatus.method} </span>
-                                    {!rightDisplay && <span style={{ fontSize: 12}}>{reqStatus.url} </span>}</>}
+                                        <span style={{ color: methodColor(reqStatus.method), fontSize: 12 }}>{reqStatus.method} </span>
+                                        {!rightDisplay && <span style={{ fontSize: 12 }}>{reqStatus.url} </span>}</>}
                                 </Space>
                             </Col>
                             <Col span={7} flex='auto' style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -113,14 +114,14 @@ const StepItem = ({stepDatas, onSelectRow, onTransferStatus, rightDisplay}) => {
                                     <span style={{ color: reqStatus.status === '200' ? 'green' : 'red' }}>{reqStatus.status} </span>
                                     <span>{`${item.step_elapsed}s`}</span>
                                 </Space>
-                                {curStepEnv != null  && <Space size={2} style={{ fontSize: 13, color: '#999', marginLeft: 4 }}>
-                                    <span style={{ fontSize: 8}}>{curStepEnv}</span>
+                                {curStepEnv != null && <Space size={2} style={{ fontSize: 13, color: '#999', marginLeft: 4 }}>
+                                    <span style={{ fontSize: 8 }}>{curStepEnv}</span>
                                 </Space>}
-                                {[2, 4, 5].includes(curStepType) && !itemDisplayEnv &&<Space size={8} style={{ fontSize: 13, color: '#999', marginLeft: 4 }}>
-                                        <span> 配置: </span>
-                                        <span style={{ fontSize: 8}}>{item?.request_config_name}</span>
+                                {[2, 4, 5].includes(curStepType) && !itemDisplayEnv && <Space size={8} style={{ fontSize: 13, color: '#999', marginLeft: 4 }}>
+                                    <span> 配置: </span>
+                                    <span style={{ fontSize: 8 }}>{item?.request_config_name}</span>
                                     {curStepType == 5 && <><span> 数据库: </span>
-                                        <span style={{ fontSize: 8}}>{item?.response_body != null ? item?.response_body[0].database_name : ''}</span></>}
+                                        <span style={{ fontSize: 8 }}>{item?.response_body != null ? item?.response_body[0].database_name : ''}</span></>}
                                 </Space>}
                             </Col>
                         </Row>

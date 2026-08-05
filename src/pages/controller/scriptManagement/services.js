@@ -3,7 +3,7 @@ import { stringify } from 'qs';
 
 //.查询抽屉历史表格数据
 export function queryHistoryTableData(params) {
-    return request('database/zzt/autoapitool/report/search', {
+    return request('database/yk/autotest/report/search', {
         // return request('/esb/logs_query', {
         method: 'POST',
         // requestType: 'form',

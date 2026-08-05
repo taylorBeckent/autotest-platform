@@ -34,7 +34,7 @@ const HttpRequest = (props) => {
                     <TabPane tab="提取" key="extract">
                         <Extract />
                     </TabPane>
-                    <TabPane tab="断言规则" key="assert">
+                    <TabPane tab="断言" key="assert">
                         <AssertRule />
                     </TabPane>
                 </Tabs>

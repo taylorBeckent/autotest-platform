@@ -35,7 +35,8 @@ const AssertRule = (props) => {
                 source: '',
                 expr: '',
                 operation: '',
-                except_value: '',            };
+                except_value: '',
+            };
             const newData = [...prev, newObj];
 
             return newData;

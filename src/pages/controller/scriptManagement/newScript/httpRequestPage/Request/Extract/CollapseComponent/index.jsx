@@ -22,90 +22,37 @@ const CollapseComponent = (props) => {
     const [expressionVal, setExpressionVal] = useState(); //. 表达式
     const [expandKey, setExpandKey] = useState([]);
 
+    // 下拉项 label（含 body 标识），title 用于选中后回显（纯文本，不含 body）
+    const buildBodyOption = (value) => ({
+        value,
+        title: value,
+        label: (
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>{value}</span>
+                <div>body</div>
+            </div>
+        )
+    });
+
     const sourceOption = [
         {
             label: 'Request',
             options: [
-                {
-                    value: 'Request Form-Data',
-                    label: (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Request Form-Data</span>
-                            <div>body</div>
-                        </div>
-                    )
-                },
-                {
-                    value: 'Request Text',
-                    label: (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Request Text</span>
-                            <div>body</div>
-                        </div>
-                    )
-                },
-                {
-                    value: 'Request Json',
-                    label: (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Request Json</span>
-                            <div>body</div>
-                        </div>
-                    )
-                },
-                {
-                    value: 'Request XML',
-                    label: (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Request XML</span>
-                            <div>body</div>
-                        </div>
-                    )
-                },
-                {
-                    value: 'Request Headers',
-                    label: 'Request Headers'
-                }
+                buildBodyOption('Request Form-Data'),
+                buildBodyOption('Request Text'),
+                buildBodyOption('Request Json'),
+                buildBodyOption('Request XML'),
+                { value: 'Request Headers', title: 'Request Headers', label: 'Request Headers' }
             ]
         },
         {
             label: 'Response',
             options: [
-                {
-                    value: 'Response Text',
-                    label: (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Response Text</span>
-                            <div>body</div>
-                        </div>
-                    )
-                },
-                {
-                    value: 'Response Json',
-                    label: (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Response Json</span>
-                            <div>body</div>
-                        </div>
-                    )
-                },
-                {
-                    value: 'Response XML',
-                    label: (
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Response XML</span>
-                            <div>body</div>
-                        </div>
-                    )
-                },
-                {
-                    value: 'Response Headers',
-                    label: 'Response Headers'
-                },
-                {
-                    value: 'Response Cookie',
-                    label: 'Response Cookie'
-                },
+                buildBodyOption('Response Text'),
+                buildBodyOption('Response Json'),
+                buildBodyOption('Response XML'),
+                { value: 'Response Headers', title: 'Response Headers', label: 'Response Headers' },
+                { value: 'Response Cookie', title: 'Response Cookie', label: 'Response Cookie' },
             ]
         },
     ];
@@ -166,6 +113,7 @@ const CollapseComponent = (props) => {
                                 placeholder="请先选择提取来源"
                                 disabled={isQuote}
                                 options={sourceOption}
+                                optionLabelProp="title"
                             />
                         </Form.Item>
 
