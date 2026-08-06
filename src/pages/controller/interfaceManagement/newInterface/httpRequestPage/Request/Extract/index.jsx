@@ -20,7 +20,6 @@ const Extract = (props) => {
                     item.id = generateUUID();
                 }
             })
-
             setExtractData(newData);
         }
     }, []);
@@ -33,7 +32,8 @@ const Extract = (props) => {
                 name: '',
                 source: '',
                 scope: "SOME",
-                expr: ''
+                expr: '',
+                index: ''
             };
             const newData = [...prev, newObj];
 

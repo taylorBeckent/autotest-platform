@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, Form, Input, Select, Button, Tag, Radio } from 'antd';
+import { Collapse, Form, Input, Select, Button, Tag, Radio, InputNumber } from 'antd';
 import styles from './index.less';
 import { DeleteOutlined } from '@ant-design/icons';
 
@@ -21,6 +21,7 @@ const CollapseComponent = (props) => {
     const [scaleVal, setScaleVal] = useState("SOME"); //.提取范围
     const [expressionVal, setExpressionVal] = useState(); //. 表达式
     const [expandKey, setExpandKey] = useState([]);
+    const [matchVal, setMatchVal] = useState(0); //. 匹配数字
 
     // 下拉项 label（含 body 标识），title 用于选中后回显（纯文本，不含 body）
     const buildBodyOption = (value) => ({
@@ -62,7 +63,8 @@ const CollapseComponent = (props) => {
         setSourceVal(currentData?.source);
         setScaleVal(currentData?.scope);
         setExpressionVal(currentData?.expr);
-        form.setFieldsValue({ 'name': currentData?.name, 'source': currentData?.source, 'scope': currentData?.scope, 'expr': currentData?.expr });
+        setMatchVal(currentData?.index);
+        form.setFieldsValue({ 'name': currentData?.name, 'source': currentData?.source, 'scope': currentData?.scope, 'expr': currentData?.expr, matchNum: currentData?.index });
     }, []);
 
     useEffect(() => {
@@ -117,6 +119,20 @@ const CollapseComponent = (props) => {
                             />
                         </Form.Item>
 
+                        {(sourceVal === 'Request Text' || sourceVal === 'Response Text') && (
+                            <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="匹配数字" name="matchNum" >
+                                <InputNumber
+                                    value={matchVal}
+                                    onChange={(e) => {
+                                        setMatchVal(e);
+                                        updateCurrentData('index', e);
+                                    }}
+                                    placeholder="0表示全部，1表示正序第一项，-1表示倒序第一项，以此类推"
+                                    style={{ width: '100%' }}
+                                />
+                            </Form.Item>
+                        )}
+
                         <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 9 }} label="提取范围" name="scope"
                             initialValue={"SOME"}
                         >
@@ -134,10 +150,10 @@ const CollapseComponent = (props) => {
                         </Form.Item>
 
                         {scaleVal != "ALL" && (
-                            <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label="提取表达式" name="expr" >
+                            <Form.Item labelCol={{ span: 6 }} wrapperCol={{ span: 16 }} label={(sourceVal === 'Request Text' || sourceVal === 'Response Text') ? '正则表达式' : '提取表达式'} name="expr" >
                                 <Input value={expressionVal} onChange={(e) => setExpressionVal(e.target.value)}
                                     onBlur={() => updateCurrentData('expr', expressionVal)}
-                                    placeholder="提取表达式"
+                                    placeholder={(sourceVal === 'Request Text' || sourceVal === 'Response Text') ? '正则表达式' : '提取表达式'}
                                     style={{ width: '100%' }}
                                     disabled={isQuote}
                                 />
