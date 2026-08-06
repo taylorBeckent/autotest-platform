@@ -45,7 +45,6 @@ const StepDbHeader = (props) => {
                         checkedChildren='开'
                         unCheckedChildren='关'
                         onChange={(checked) => {
-                            console.log('isSearchStop checked: ', checked);
                             setIsSearchStop(checked);
                         }}
                     />

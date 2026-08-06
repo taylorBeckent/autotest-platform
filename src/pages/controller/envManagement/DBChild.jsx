@@ -180,8 +180,8 @@ const DBChildTable = (props) => {
             type: 'envManagement/DbTestConnection',
             payload: {
                 id: record.id,
-                app_id: currentRecord?.project_id,
-                env: currentRecord?.env_name,
+                project_id: currentRecord?.project_id,
+                env_name: currentRecord?.env_name,
                 config_name: record.config_name,
                 db_name: record.db_name
                 // db_type: record.db_type,

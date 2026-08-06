@@ -89,7 +89,6 @@ const RequestXml = (props) => {
         // }
     }
     const handleEditorChange = (e) => {
-        console.log('是否走这里--------------');
         setXMLData(e.target.value);
         dispatch({
             type: 'interfaceManagement/syncXmlData',
@@ -115,7 +114,6 @@ const RequestXml = (props) => {
 
     const updateTreeList = (insertList) => {
         let finalList = utils.recurseTreeList(stepTreeList, insertList, selectedNode);
-        console.log('finalList', finalList);
         dispatch({
             type: 'scriptManagement/syncStepTreeList',
             stepTreeList: finalList

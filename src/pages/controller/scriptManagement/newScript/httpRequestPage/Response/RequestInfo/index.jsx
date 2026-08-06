@@ -12,16 +12,13 @@ const RequestInfo = (props) => {
         scriptManagement: { responseInfo, selectedNode }
     } = props;
 
-    // console.log(responseInfo);
-
     const [bodyData, setBodyData] = useState();
     const [headerData, setHeaderData] = useState();
 
     useEffect(() => {
         if (responseInfo?.id === selectedNode.id) {
-            console.log('responseInfo', responseInfo);
             //. body
-            if (responseInfo?.request_info?.body &&responseInfo?.request_info?.body_type == 'json') {
+            if (responseInfo?.request_info?.body && responseInfo?.request_info?.body_type == 'json') {
                 let bodyStr = JSON.stringify(responseInfo?.request_info?.body, null, 2);
                 setBodyData(bodyStr);
                 //. header
@@ -40,10 +37,10 @@ const RequestInfo = (props) => {
 
 
         }
-        if(responseInfo?.request_info?.body_type == 'xml'){
+        if (responseInfo?.request_info?.body_type == 'xml') {
             handleFormat()
         }
-       
+
     }, [responseInfo, selectedNode])
     useEffect(() => {
         handleFormat()
@@ -97,13 +94,11 @@ const RequestInfo = (props) => {
     const handleFormat = () => {
         // if (!bodyData || !bodyData.trim()) {
         if (!bodyData) {
-            console.log('shifou偶这里-----', bodyData);
             return;
         }
         try {
             // 不需要 cloneDeep，直接传字符串即可
             const formatted = formatXmlContent(bodyData);
-            console.log('formatted', formatted);
             setBodyData(formatted);
         } catch (err) {
             // message.error(`格式化失败: ${err.message}`);

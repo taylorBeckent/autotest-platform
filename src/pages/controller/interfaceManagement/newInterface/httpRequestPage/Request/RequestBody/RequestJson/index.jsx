@@ -38,7 +38,6 @@ const RequestJson = (props) => {
     }, []);
 
     const handleEditorChange = (value, e) => {
-        console.log('setJsonDatae--', e);
         setJsonData(e);
 
         dispatch({

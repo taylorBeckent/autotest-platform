@@ -56,7 +56,6 @@ function getFildNameReplaceZip(res) {
   let fileName = '';
   if (disposition) {
     const arr = disposition.split('=');
-    console.log(arr[1], arr[1].indexOf("utf-8''") , arr[1].indexOf("''"));
     let str = arr[1].indexOf("''") ? arr[1].split("''")[1] : arr[1];
     fileName = decodeURIComponent(str);
   }
@@ -454,6 +453,7 @@ function postGetExcelSync(url, params, callback) {
     headers: {
       Authorization: token,
       Accept: 'application/json',
+      token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOm51bGwsImFsaWFzIjpudWxsLCJlbWFpbCI6bnVsbCwicGhvbmUiOm51bGwsImF2YXRhciI6bnVsbCwic3RhdGUiOjAsImlzX2FjdGl2ZSI6bnVsbCwiaXNfc3VwZXJ1c2VyIjp0cnVlLCJsYXN0X2xvZ2luIjpudWxsLCJhY2Nlc3NfdG9rZW4iOm51bGwsImV4cCI6MTgxNzQzMzM5NCwidG9rZW5fdmVyc2lvbiI6MH0.k6ue_ZpEvsaDx9LrBHjDTaSpzS0dfGPsZif3r4ArK2Y'
     },
     responseType: 'blob' // 表明返回服务器返回的数据类型
   }).then(res => {
@@ -672,10 +672,7 @@ function postGetExcel7(url, params, callback) {
         }
       } catch (error) {
         const content = res;
-        console.log('res:', res);
         const fileName = getFileName1(res);
-        console.log('fileName:', res);
-        console.log('fileName:', fileName);
         const blob = new Blob([content.data], {
           type: 'application/vnd.openxmlformarts-officedocument.spreadsheetml.sheet;charset=utf-8',
         });
@@ -854,7 +851,6 @@ function downloadReplaceZip(url, params, callback) {
       } catch (error) {
         const content = res;
         const fileName = getFildNameReplaceZip(res);
-        console.log("fileName", fileName);
         const blob = new Blob([content.data], {
           type: 'application/vnd.openxmlformarts-officedocument.spreadsheetml.sheet;charset=utf-8',
         });

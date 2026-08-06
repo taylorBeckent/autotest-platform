@@ -54,7 +54,6 @@ const RequestJson = (props) => {
 
     const updateTreeList = (insertList) => {
         let finalList = utils.recurseTreeList(stepTreeList, insertList, selectedNode);
-        console.log('finalList', finalList);
         dispatch({
             type: 'scriptManagement/syncStepTreeList',
             stepTreeList: finalList

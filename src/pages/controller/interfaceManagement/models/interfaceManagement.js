@@ -143,7 +143,6 @@ export default {
             return { ...state, jsonData };
         },
         syncXmlData(state, { xmlData }) {
-            console.log('xmlData-----',xmlData);
             return { ...state, xmlData };
         },
         syncTitleProtocalType(state, { titleProtocalType }) {

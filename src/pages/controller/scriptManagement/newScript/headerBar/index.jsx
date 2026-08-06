@@ -225,7 +225,6 @@ const HeaderBar = (props) => {
         let curSelectedNode = JSON.parse(JSON.stringify(selectedNode)); //. 之前选中节点
 
         copyTreeList.forEach(item => {
-            // console.log('copyItem.id == selectedNode.id', copyItem, selectedNode);
             if (item.step_name == selectedNode.step_name) {
                 item.isSelected = true;
                 item.isHovered = true;
@@ -267,7 +266,6 @@ const HeaderBar = (props) => {
 
         //. 步骤名称重复校验
         let stepTree = JSON.parse(JSON.stringify(stepList));
-        console.log('stepList----------', stepList);
         const validateMsg = utils.stepValidateCheck(stepTree);
         if (validateMsg.length > 0) {
             message.error(validateMsg);
@@ -285,9 +283,7 @@ const HeaderBar = (props) => {
         maxStepNo.current = 0;
 
         let parseJsonStepList = recurseTree(addStepNoList); //. 解析JSON对象
-        console.log('parseJsonStepList----------', parseJsonStepList);
         let argumentStepList = headerRemoveField(parseJsonStepList); //. 去除数组中的content-length
-        console.log('argumentStepList----------', argumentStepList);
         let caseInformation = {
             ...caseInfo,
             case_tags: tagListTransform(caseInfo?.case_tags),

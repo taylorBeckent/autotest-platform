@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, } from 'react';
-import { Table, Popconfirm, Popover, Input, Button, Spin, Form, Card, Row, Col, Select, Checkbox, Cascader } from 'antd';
+import { Table, Popconfirm, Popover, Input, Button, Spin, Form, Card, Row, Col, Select, Checkbox, Cascader, message } from 'antd';
 import { DeleteOutlined, CopyOutlined, TagsOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import { connect, history } from 'umi';
+import download from '@/utils/download';
 import { NodeTypeReverseMap } from '@/pages/controller/common';
+import { log } from 'lodash-decorators/utils';
 
 const { Option } = Select;
 
@@ -21,6 +23,7 @@ const InterfaceManagement = (props) => {
     const [tagLoading, setTagLoading] = useState(false); //. 标签loading
     const [tableLoading, setTableLoading] = useState(); //. 表格loading;
     const [msgFormat, setMsgFormat] = useState([]); //. 报文格式;
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     useEffect(() => {
         handleInit();
@@ -230,21 +233,6 @@ const InterfaceManagement = (props) => {
     //. 应用
     const applicationChange = (value) => {
         setApplicationId(value);
-        if (value) {
-            // setTagLoading(true);
-            dispatch({
-                type: 'scriptManagement/TagSearchCascader',
-                params: {
-                    tag_project: value,
-                    tag_type: '接口',
-                    page: 1,
-                    page_size: 999
-                },
-                callback: _ => {
-                    // setTagLoading(false);
-                }
-            })
-        }
     };
 
     //. 查询
@@ -266,7 +254,7 @@ const InterfaceManagement = (props) => {
                 request_args_type: form.getFieldValue('request_args_type'),
                 case_project: applicationId || undefined,
                 case_tags: (Array.isArray(allCheckValues) && allCheckValues.length > 0) ? tagListTransform(allCheckValues) : [],
-                case_type: ['公共接口'],
+                case_types: ['公共接口'],
                 page,
                 page_size: size
             }
@@ -323,6 +311,18 @@ const InterfaceManagement = (props) => {
                 }
             }
         })
+    };
+
+    //. 批量导出
+    const handleExport = () => {
+        if (!selectedRowKeys || selectedRowKeys.length === 0) {
+            message.warn('请先选择要导出的接口');
+            return;
+        }
+
+        setTableLoading(true);
+        let url = selectedRowKeys.length > 10 ? '/database/yk/autotest/case/export_case_datagram_async' : '/database/yk/autotest/case/export_case_datagram_sync';
+        download.postGetExcelSync(url, { case_ids: selectedRowKeys }, () => { setTableLoading(false) });
     };
 
     return (
@@ -467,6 +467,10 @@ const InterfaceManagement = (props) => {
                             }
                         })
                     }} >新增</Button>
+
+                    <Popover content="报文批量导出">
+                        <Button type='primary' style={{ marginLeft: '10px' }} onClick={() => { handleExport() }}>报文导出</Button>
+                    </Popover>
                 </Row>
             </Form>
 
@@ -477,8 +481,11 @@ const InterfaceManagement = (props) => {
                         columns={columns}
                         dataSource={tableData}
                         scroll={{ x: '10%' }}
-                        // scroll={{ x: 'max-content' }}
                         rowKey="case_id"
+                        rowSelection={{
+                            selectedRowKeys,
+                            onChange: (keys, rows) => setSelectedRowKeys(keys),
+                        }}
                         pagination={{
                             ...pageInfo,
                             total: total,
@@ -500,18 +507,6 @@ const InterfaceManagement = (props) => {
 
 //. 节点类型 - 反向映射
 const nodeTypeReverseMap = { ...NodeTypeReverseMap };
-// const nodeTypeReverseMap = {
-//     '用户变量': 0,
-//     '引用公共脚本/接口': 1,
-//     'HTTP请求': 2,
-//     '等待控制': 3,
-//     'TCP请求': 4,
-//     '数据库请求': 5,
-//     '代码请求(Python)': 6,
-//     '条件分支': 7,
-//     '循环结构': 8
-// };
-
 
 export default connect(({ scriptManagement, interfaceInfo, loading }) => ({
     scriptManagement,

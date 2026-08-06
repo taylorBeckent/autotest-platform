@@ -17,7 +17,6 @@ const RequestBody = (props) => {
     const [curType, setCurType] = useState('none');
 
     useEffect(() => {
-        console.log('interfaceInfo', interfaceInfo);
         if (interfaceInfo?.request_args_type) {
             setCurType(interfaceInfo?.request_args_type);
         }

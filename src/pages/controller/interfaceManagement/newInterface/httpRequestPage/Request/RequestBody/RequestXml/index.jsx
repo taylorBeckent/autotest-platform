@@ -23,7 +23,6 @@ const RequestXml = (props) => {
     useEffect(() => {
         if (interfaceInfo?.request_text) {
             let initJsonData;
-            console.log('typeof (interfaceInfo?.request_text)', typeof (interfaceInfo?.request_text));
             if (typeof (interfaceInfo?.request_text) === 'object') {
                 initJsonData = JSON.stringify(interfaceInfo?.request_text, null, 2);
             } else if (typeof (interfaceInfo?.request_text) === 'string') {
@@ -56,7 +55,6 @@ const RequestXml = (props) => {
     // 执行格式化
     const handleFormat = () => {
         if (!xmlData || !xmlData.trim()) {
-            console.log('走错屋--------', xmlData);
             // setError('⚠ 请输入 XML 内容');
             // setStatusMessage('');
             return;

@@ -542,7 +542,7 @@ const ScriptManagement = (props) => {
                 case_name: form.getFieldValue('scriptName'),
                 case_project: applicationId || undefined,
                 case_tags: (Array.isArray(allCheckValues) && allCheckValues.length > 0) ? tagListTransform(allCheckValues) : [],
-                case_type: ['用户脚本', '公共脚本'],
+                case_types: ['用户脚本', '公共脚本'],
                 page,
                 page_size: size
             }

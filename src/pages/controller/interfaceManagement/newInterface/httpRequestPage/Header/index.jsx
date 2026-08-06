@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Select, Input, Button, Row, Col, message, Modal, Form } from 'antd';
 import { connect } from 'umi';
 import styles from './index.less';
+import { log } from 'lodash-decorators/utils';
 
 const { Option } = Select;
 
@@ -11,7 +12,6 @@ const HttpHeader = (props) => {
         scriptManagement: { caseInfo, stepTreeList, applicationList, configList },
         interfaceManagement: { interfaceInfo, jsonData, titleProtocalType, xmlData }
     } = props;
-    console.log('titleProtocalType', titleProtocalType);
     const [requestType, setRequestType] = useState(); //. 请求类型
     const [targetProjectId, setTargetProjectId] = useState(); //. 所属系统value
     const [configName, setConfigName] = useState(); //. 配置名称
@@ -27,32 +27,20 @@ const HttpHeader = (props) => {
     useEffect(() => {
         stepTreeList[1]?.request_method ? setRequestType(stepTreeList[1]?.request_method) : setRequestType();
         stepTreeList[1]?.request_url ? setRequestPath(stepTreeList[1]?.request_url) : setRequestPath();
-        stepTreeList[1]?.step_name ? setRequestName(stepTreeList[1]?.step_name) : setRequestName();
         stepTreeList[1]?.request_config_name ? setConfigName(stepTreeList[1]?.request_config_name) : setConfigName();
-        // stepTreeList[1]?.request_project_id ? setTargetProjectId(stepTreeList[1]?.request_project_id) : setTargetProjectId();
-        if (stepTreeList[1]?.request_project_id) {
-            setTargetProjectId(stepTreeList[1]?.request_project_id);
-            dispatch({
-                type: 'scriptManagement/GetConfigNames',
-                params: {
-                    project_id: stepTreeList[1]?.request_project_id
-                },
-                callback: _ => { }
-            });
-            dispatch({
-                type: 'scriptManagement/GetEnvNames',
-                params: {
-                    project_id: [stepTreeList[1]?.request_project_id]
-                },
-                callback: (flag, resData) => {
-                    let envArr = (flag === 'success' && Array.isArray(resData[stepTreeList[1]?.request_project_id]['APP']) && resData[stepTreeList[1]?.request_project_id]['APP'].length > 0) ? resData[stepTreeList[1]?.request_project_id]['APP'] : [];
-                    setEnvList(envArr);
-                }
-            });
-        } else {
-            setTargetProjectId();
-        }
+
     }, [stepTreeList]);
+
+    useEffect(() => {
+        if (caseInfo.case_name) {
+            setRequestName(caseInfo.case_name);
+            updateInterfaceInfo('step_name', caseInfo.case_name);
+        }
+    }, [caseInfo.case_name])
+
+    useEffect(() => {
+        caseInfo.case_project && applicationChange(caseInfo.case_project);
+    }, [caseInfo.case_project])
 
     //. 步骤名称change
     const requestNameChange = (e) => {
@@ -88,7 +76,6 @@ const HttpHeader = (props) => {
             },
             callback: (flag, resData) => {
                 let envArr = (flag === 'success' && Array.isArray(resData[e]['APP']) && resData[e]['APP'].length > 0) ? resData[e]['APP'] : [];
-                console.log('envArr', envArr);
                 setEnvList(envArr);
             }
         });
@@ -183,7 +170,6 @@ const HttpHeader = (props) => {
             //. 解析json格式校验
             let parseFlag = 'success';  //. json解析标志： 成功/失败
             if (titleProtocalType == 'HTTP') {
-                console.log('typeof (jsonData)', typeof (jsonData));
                 if (jsonData && typeof (jsonData) == 'string') {
                     try {
                         interfaceInfo.request_body = JSON.parse(jsonData);
@@ -230,7 +216,6 @@ const HttpHeader = (props) => {
                     interfaceInfo.request_body = {};
                 }
                 if (xmlData && typeof (xmlData) == 'string') {
-                    console.log('xmlData', xmlData);
                     try {
                         interfaceInfo.request_text = xmlData;
                     } catch (error) {
@@ -278,6 +263,7 @@ const HttpHeader = (props) => {
                 </Col>
                 <Col span={8}>
                     <Input
+                        disabled
                         placeholder="请输入请求名称"
                         value={requestName}
                         onChange={requestNameChange}
@@ -302,6 +288,7 @@ const HttpHeader = (props) => {
                     </Col> : <Col span={3}></Col>}
                     <Col span={4}>
                         <Select
+                            disabled
                             allowClear
                             showSearch
                             style={{ width: '100%' }}
