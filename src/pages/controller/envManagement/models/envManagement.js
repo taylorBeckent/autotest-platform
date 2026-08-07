@@ -46,7 +46,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success', data);
-                // message.success(res.message);
+                // // message.success(res.message);
             } else {
                 callback('faild', {});
                 message.error(res.message);
@@ -65,7 +65,7 @@ export default {
                     total: res.total
                 })
                 // callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -83,7 +83,7 @@ export default {
                     // total: res.total
                 })
                 // callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -96,7 +96,7 @@ export default {
             const { code, data, status } = res;
             if (code == '000000') {
                 callback();
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -109,7 +109,7 @@ export default {
             const { code, data, status } = res;
             if (code == '000000') {
                 callback();
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -123,7 +123,7 @@ export default {
             const { code, data, status } = res;
             if (code == '000000') {
                 callback();
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -137,7 +137,7 @@ export default {
             const { code } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -158,7 +158,7 @@ export default {
                     type: 'syncSystemOption',
                     systemOption: data,
                 })
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 message.error(res.message);
             }
@@ -190,7 +190,7 @@ export default {
                     total: res.total
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -205,7 +205,7 @@ export default {
             const { code, data, status } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -220,7 +220,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -233,7 +233,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -258,7 +258,7 @@ export default {
                     total
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -283,7 +283,7 @@ export default {
                     total
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -308,7 +308,7 @@ export default {
                     total
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -341,7 +341,7 @@ export default {
                     total
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -369,7 +369,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -382,7 +382,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -395,7 +395,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -408,7 +408,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -421,7 +421,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);

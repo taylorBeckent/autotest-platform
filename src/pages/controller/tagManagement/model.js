@@ -53,7 +53,7 @@ export default {
             });
             const { code, data } = res;
             if (code === '000000') {
-                message.success(res.message);
+                // message.success(res.message);
                 callback('success', data);
             } else {
                 message.error(res?.message);
@@ -65,7 +65,7 @@ export default {
             const res = yield call(tagCreate, params);
             const { code, data } = res;
             if (code === '000000') {
-                message.success(res.message);
+                // message.success(res.message);
                 callback('success');
             } else {
                 message.error(res.message);
@@ -77,7 +77,7 @@ export default {
             const res = yield call(tagUpdate, params);
             const { code, data } = res;
             if (code === '000000') {
-                message.success(res.message);
+                // message.success(res.message);
                 callback('success');
             } else {
                 message.error(res.message);
@@ -89,7 +89,7 @@ export default {
             const res = yield call(tagDelete, params);
             const { code, data } = res;
             if (code === '000000') {
-                message.success(res.message);
+                // message.success(res.message);
                 callback('success');
             } else {
                 message.error(res.message);

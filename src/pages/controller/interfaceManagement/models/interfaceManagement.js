@@ -42,7 +42,7 @@ export default {
                     })
                 }
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -64,7 +64,7 @@ export default {
                     responseInfo: data
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -85,7 +85,7 @@ export default {
                     responseInfo: data
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -100,7 +100,7 @@ export default {
             const { code, data } = res;
             if (code === '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -115,7 +115,7 @@ export default {
             const { code, data } = res;
             if (code === '000000') {
                 callback('success', data);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed', data);
                 message.error(res.message);

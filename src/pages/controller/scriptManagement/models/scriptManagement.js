@@ -102,7 +102,7 @@ export default {
                     hisTotal: total
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -120,7 +120,7 @@ export default {
                     hisDetailTableData: data
                 })
                 // callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -148,7 +148,7 @@ export default {
                     applicationList: data
                 })
                 // callback('success');
-                message.success(res.message);
+                // // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -177,7 +177,7 @@ export default {
                     applicationList: data
                 })
                 // callback('success');
-                message.success(res.message);
+                // // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -195,7 +195,7 @@ export default {
                     type: 'syncEnvApps',
                     envAppsData: data,
                 })
-                message.success(res.message);
+                // // message.success(res.message);
             } else {
                 message.error(res.message);
             }
@@ -207,7 +207,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback(data);
-                message.success(res.message);
+                // // message.success(res.message);
             } else {
                 message.error(res.message);
             }
@@ -251,7 +251,7 @@ export default {
                     tagsList: finalArr
                 })
                 callback('success');
-                message.success(res.message);
+                // // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -297,7 +297,7 @@ export default {
                 })
 
                 callback('success', data);
-                // message.success(res.message);
+                // // message.success(res.message);
             } else {
                 callback('faild', []);
                 message.error(res.message);
@@ -318,7 +318,7 @@ export default {
                     total: res?.total || 0
                 });
                 // callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('faild');
                 message.error(res.message);
@@ -331,7 +331,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild');
                 message.error(res.message);
@@ -368,7 +368,7 @@ export default {
                     })
                 }
                 callback('success', finalData);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild', []);
                 message.error(res.message);
@@ -380,7 +380,7 @@ export default {
             const { code, data } = res;
             if (code == '000000') {
                 callback('success', data);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild', []);
                 message.error(res.message);
@@ -399,7 +399,7 @@ export default {
                     finalData = utils.transformStepTreeData([], nodeTypeReverseMap, 'first', 0);
                 }
                 callback('success', finalData);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild', []);
                 message.error(res.message);
@@ -440,7 +440,7 @@ export default {
                 }
 
                 callback('success', finalData);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild', []);
                 message.error(res.message);
@@ -456,7 +456,7 @@ export default {
                 if (data && data.length > 0 && data[0]?.step_type) finalData = data;
 
                 callback('success', finalData);
-                // message.success(res.message);
+                // // message.success(res.message);
             } else {
                 callback('faild', []);
                 message.error(res.message);
@@ -493,7 +493,7 @@ export default {
                     })
                 }
                 callback('success', data, finalData);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild', {}, []);
                 message.error(res.message);
@@ -556,7 +556,7 @@ export default {
                     })
                 }
                 callback('success', resData, data?.case);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('faild', []);
                 message.error(res.message);
@@ -573,7 +573,7 @@ export default {
                     envList: data
                 })
                 // callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 // callback('failed');
                 message.error(res.message);
@@ -612,7 +612,7 @@ export default {
                     responseInfo: data
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -633,7 +633,7 @@ export default {
                     responseInfo: data
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -648,7 +648,7 @@ export default {
                 const { code, data } = res;
                 if (code === '000000') {
                     callback('success');
-                    message.success(res.message);
+                    // message.success(res.message);
                 } else {
                     callback('failed');
                     message.error(res.message);
@@ -667,7 +667,7 @@ export default {
             const { code, data } = res;
             if (code === '000000') {
                 callback('success', data);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed', data);
                 message.error(res.message);
@@ -684,7 +684,7 @@ export default {
                     type: 'syncEnvOption',
                     envOption: data
                 })
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed', data);
                 message.error(res.message);
@@ -705,7 +705,7 @@ export default {
                     newList.push(obj);
                 })
                 callback('success', data);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed', []);
                 message.error(res.message);
@@ -726,7 +726,7 @@ export default {
             if (code === '000000') {
                 newList = data;
                 callback('success', data);
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed', []);
                 message.error(res.message);
@@ -745,7 +745,7 @@ export default {
             const { code, data } = res;
             if (code === '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -759,7 +759,7 @@ export default {
             let newList = [];
             if (code === '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -776,7 +776,7 @@ export default {
                     variableList: data
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 yield put({
                     type: 'syncVariableList',
@@ -793,7 +793,7 @@ export default {
             const { code, data } = res;
             if (code === '000000') {
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
@@ -810,7 +810,7 @@ export default {
                     configList: data
                 })
                 callback('success');
-                message.success(res.message);
+                // message.success(res.message);
             } else {
                 callback('failed');
                 message.error(res.message);
