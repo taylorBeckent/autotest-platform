@@ -129,7 +129,7 @@ const NewScript = (props) => {
 
         dispatch({
             type: 'scriptManagement/syncCommonVariable',
-            commonVariable: (commonVariable && commonVariable.length > 0) ? commonVariable : currentData?.session_variables
+            commonVariable: (commonVariable && commonVariable.length > 0) ? commonVariable : (Array.isArray(currentData?.session_variables) ? currentData?.session_variables : [])
         });
 
     };

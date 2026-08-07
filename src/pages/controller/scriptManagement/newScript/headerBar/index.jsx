@@ -7,6 +7,8 @@ import styles from './index.less';
 import EnvConfigModal from './envConfig';
 import { databaseFieldMust, databaseFieldMustObj } from '@/pages/controller/common';
 
+const { Option } = Select;
+
 const HeaderBar = (props) => {
 
     const {
