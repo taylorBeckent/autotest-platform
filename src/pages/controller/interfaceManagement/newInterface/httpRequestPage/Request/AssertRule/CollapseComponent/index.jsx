@@ -21,6 +21,7 @@ const AssertCollapse = (props) => {
     const [expressionVal, setExpressionVal] = useState(); //. 表达式
     const [assertSelect, setAssertSelect] = useState(); //. 断言选中
     const [assertVal, setAssertVal] = useState(); //. 断言内容
+    const [expandKey, setExpandKey] = useState([]);
 
     const sourceOption = [...SourceOption];
 
@@ -34,6 +35,10 @@ const AssertCollapse = (props) => {
         setAssertSelect(currentData?.operation || undefined);
         setAssertVal(currentData?.except_value || undefined);
         form.setFieldsValue({ 'name': currentData?.name || undefined, 'source': currentData?.source || undefined, 'expr': currentData?.expr || undefined, })
+    }, []);
+
+    useEffect(() => {
+        (currentData?.name || currentData?.source || currentData?.expr) ? setExpandKey([]) : setExpandKey(['1']);
     }, []);
 
     const HeaderRender = () => {
@@ -58,7 +63,7 @@ const AssertCollapse = (props) => {
 
     return (
         <div className={styles['collapse-container']} key={currentData.id}>
-            <Collapse>
+            <Collapse activeKey={expandKey} onChange={keys => { setExpandKey(keys) }} >
                 <Panel header={HeaderRender()} key="1" >
                     <Form form={form}>
                         <Form.Item labelCol={{ span: 6 }} wrapperCo={{ span: 16 }} label="断言名称" name="name" >
