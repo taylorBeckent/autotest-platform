@@ -5,7 +5,6 @@ import styles from './index.less';
 import { connect, history } from 'umi';
 import download from '@/utils/download';
 import { NodeTypeReverseMap } from '@/pages/controller/common';
-import { log } from 'lodash-decorators/utils';
 
 const { Option } = Select;
 
@@ -24,6 +23,10 @@ const InterfaceManagement = (props) => {
     const [tableLoading, setTableLoading] = useState(); //. 表格loading;
     const [msgFormat, setMsgFormat] = useState([]); //. 报文格式;
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+    const [sorterInfo, setSorterInfo] = useState({ columnKey: 'updated_time' });
+    const sorterInfoRef = useRef();
+    const updatedTimeRef = useRef('descend');
 
     useEffect(() => {
         handleInit();
@@ -176,6 +179,8 @@ const InterfaceManagement = (props) => {
             align: 'center',
             width: 120,
             // ellipsis: true,
+            sorter: true,
+            sortOrder: sorterInfo?.columnKey === 'updated_time' && updatedTimeRef.current
         },
         {
             title: '创建时间',
@@ -245,6 +250,14 @@ const InterfaceManagement = (props) => {
             }
         });
         // let selectedTagList = getAllSelectedValues();
+        let order = [];
+        if (sorterInfoRef.current?.columnKey === 'updated_time') {
+            if (updatedTimeRef.current !== 'descend') {
+                order.push('updated_time');
+            } else {
+                order.push('-updated_time');
+            }
+        }
 
         dispatch({
             type: 'scriptManagement/CaseSearch',
@@ -256,7 +269,8 @@ const InterfaceManagement = (props) => {
                 case_tags: (Array.isArray(allCheckValues) && allCheckValues.length > 0) ? tagListTransform(allCheckValues) : [],
                 case_types: ['公共接口'],
                 page,
-                page_size: size
+                page_size: size,
+                order
             }
         })
     };
@@ -496,7 +510,12 @@ const InterfaceManagement = (props) => {
                                 return `${range[0]}-${range[1]}条，共${total}条`
                             },
                         }}
-                        onChange={({ current, pageSize }) => handleSearch({ page: current, size: pageSize })}
+                        onChange={({ current, pageSize }, filter, sorter) => {
+                            setSorterInfo(sorter);
+                            sorterInfoRef.current = sorter;
+                            sorter.columnKey === 'updated_time' && (updatedTimeRef.current = sorter.order);
+                            handleSearch({ page: current, size: pageSize });
+                        }}
                     />
                 </div>
             </div>

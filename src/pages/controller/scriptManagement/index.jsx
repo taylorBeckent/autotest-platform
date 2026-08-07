@@ -47,6 +47,11 @@ const ScriptManagement = (props) => {
     const [finalList, setFinalList] = useState([]); //. 校验处理完成后的数据
     const [debugParams, setDebugParams] = useState({}); //. 校验完成处理
 
+    const [sorterInfo, setSorterInfo] = useState({ columnKey: 'updated_time' });
+    const sorterInfoRef = useRef();
+    const updatedTimeRef = useRef('descend');
+    const caseLastTimeRef = useRef('descend');
+
     useEffect(() => {
 
         dispatch({
@@ -178,7 +183,9 @@ const ScriptManagement = (props) => {
             key: 'updated_time',
             dataIndex: 'updated_time',
             align: 'center',
-            width: 120
+            width: 120,
+            sorter: true,
+            sortOrder: sorterInfo?.columnKey === 'updated_time' && updatedTimeRef.current
         },
         {
             title: '执行结果',
@@ -196,7 +203,9 @@ const ScriptManagement = (props) => {
             key: 'case_last_time',
             dataIndex: 'case_last_time',
             align: 'center',
-            width: 120
+            width: 120,
+            sorter: true,
+            sortOrder: sorterInfo?.columnKey === 'case_last_time' && caseLastTimeRef.current
         },
         {
             title: '创建人',
@@ -535,6 +544,20 @@ const ScriptManagement = (props) => {
                 pageSize: size
             }
         });
+        let order = [];
+        if (sorterInfoRef.current?.columnKey === 'updated_time') {
+            if (updatedTimeRef.current !== 'descend') {
+                order.push('updated_time');
+            } else {
+                order.push('-updated_time');
+            }
+        } else if (sorterInfoRef.current?.columnKey === 'case_last_time') {
+            if (caseLastTimeRef.current !== 'descend') {
+                order.push('case_last_time');
+            } else {
+                order.push('-case_last_time');
+            }
+        }
 
         dispatch({
             type: 'scriptManagement/CaseSearch',
@@ -544,7 +567,8 @@ const ScriptManagement = (props) => {
                 case_tags: (Array.isArray(allCheckValues) && allCheckValues.length > 0) ? tagListTransform(allCheckValues) : [],
                 case_types: ['用户脚本', '公共脚本'],
                 page,
-                page_size: size
+                page_size: size,
+                order
             }
         })
     };
@@ -761,7 +785,13 @@ const ScriptManagement = (props) => {
                                 return `${range[0]}-${range[1]}条，共${total}条`
                             },
                         }}
-                        onChange={({ current, pageSize }) => handleSearch({ page: current, size: pageSize })}
+                        onChange={({ current, pageSize }, filter, sorter) => {
+                            setSorterInfo(sorter);
+                            sorterInfoRef.current = sorter;
+                            sorter.columnKey === 'updated_time' && (updatedTimeRef.current = sorter.order);
+                            sorter.columnKey === 'case_last_time' && (caseLastTimeRef.current = sorter.order);
+                            handleSearch({ page: current, size: pageSize });
+                        }}
                     />
                 </div>
             </div>
