@@ -23,9 +23,9 @@ const AssertCollapse = (props) => {
     const [assertSelect, setAssertSelect] = useState(); //. 断言选中
     const [assertVal, setAssertVal] = useState(); //. 断言内容
 
-    const sourceOption = [ ...SourceOption ];
+    const sourceOption = [...SourceOption];
 
-    const assertType = [ ...AssertType ];
+    const assertType = [...AssertType];
 
     useEffect(() => {
         setNameVal(currentData?.name || undefined);
@@ -69,7 +69,7 @@ const AssertCollapse = (props) => {
                         </Form.Item>
 
                         <Form.Item labelCol={{ span: 6 }} wrapperCo={{ span: 16 }} label="断言对象" name="source"
-                            // initialValue="Response Text"
+                        // initialValue="Response Text"
                         >
                             <Select
                                 value={sourceVal}
@@ -99,7 +99,14 @@ const AssertCollapse = (props) => {
                             <div>
                                 <Select
                                     value={assertSelect}
-                                    onChange={e => { setAssertSelect(e); updateCurrentData('operation', e) }}
+                                    onChange={e => {
+                                        setAssertSelect(e);
+                                        updateCurrentData('operation', e);
+                                        if (e === '为空' || e === '不为空') {
+                                            setAssertVal(undefined);
+                                            updateCurrentData('except_value', undefined)
+                                        }
+                                    }}
                                     placeholder="匹配规则"
                                     style={{ width: '50%' }}
                                     disabled={isQuote}
@@ -108,7 +115,9 @@ const AssertCollapse = (props) => {
                                         <Option key={item} value={item}>{item}</Option>
                                     ))}
                                 </Select>
-                                <Input value={assertVal} onChange={e => { setAssertVal(e.target.value); updateCurrentData('except_value', e.target.value) }} placeholder="预期值" style={{ width: '50%' }} disabled={isQuote} />
+                                {(assertSelect === '为空' || assertSelect === '不为空') ? null : (
+                                    <Input value={assertVal} onChange={e => { setAssertVal(e.target.value); updateCurrentData('except_value', e.target.value) }} placeholder="预期值" style={{ width: '50%' }} disabled={isQuote} />
+                                )}
                             </div>
                         </Form.Item>
                     </Form>

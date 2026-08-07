@@ -33,7 +33,7 @@ const AssertCollapse = (props) => {
         setExpressionVal(currentData?.expr || undefined);
         setAssertSelect(currentData?.operation || undefined);
         setAssertVal(currentData?.except_value || undefined);
-        form.setFieldsValue({ 'name': currentData?.name  || undefined, 'source': currentData?.source  || undefined, 'expr': currentData?.expr  || undefined, })
+        form.setFieldsValue({ 'name': currentData?.name || undefined, 'source': currentData?.source || undefined, 'expr': currentData?.expr || undefined, })
     }, []);
 
     const HeaderRender = () => {
@@ -96,7 +96,14 @@ const AssertCollapse = (props) => {
                             <div>
                                 <Select
                                     value={assertSelect}
-                                    onChange={e => { setAssertSelect(e); updateCurrentData('operation', e) }}
+                                    onChange={e => {
+                                        setAssertSelect(e);
+                                        updateCurrentData('operation', e);
+                                        if (e === '为空' || e === '不为空') {
+                                            setAssertVal(undefined);
+                                            updateCurrentData('except_value', undefined)
+                                        }
+                                    }}
                                     placeholder="匹配规则"
                                     style={{ width: '50%' }}
                                 >
@@ -104,7 +111,9 @@ const AssertCollapse = (props) => {
                                         <Option key={item} value={item}>{item}</Option>
                                     ))}
                                 </Select>
-                                <Input value={assertVal} onChange={e => { setAssertVal(e.target.value); updateCurrentData('except_value', e.target.value) }} placeholder="预期值" style={{ width: '50%' }} />
+                                {(assertSelect === '为空' || assertSelect === '不为空') ? null : (
+                                    <Input value={assertVal} onChange={e => { setAssertVal(e.target.value); updateCurrentData('except_value', e.target.value) }} placeholder="预期值" style={{ width: '50%' }} />
+                                )}
                             </div>
                         </Form.Item>
                     </Form>

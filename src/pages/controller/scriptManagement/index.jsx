@@ -62,7 +62,7 @@ const ScriptManagement = (props) => {
             },
         });
 
-        handleSearch({ page: 1, size: 50 })
+        handleSearch({ page: 1, size: 10 })
     }, []);
 
     useEffect(() => {
