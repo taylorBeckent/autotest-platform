@@ -47,6 +47,17 @@ const Extract = (props) => {
         })
     };
 
+    const handleCopy = (e, record) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setExtractData(prev => {
+            const newData = [...prev, { ...record, id: generateUUID() }];
+            updateTreeList([{ insertKey: 'assert_validators', insertValue: newData }]);
+
+            return newData;
+        });
+    };
+
     //. 删除行
     const handleDelete = (e, record) => {
         e.preventDefault();
@@ -94,6 +105,7 @@ const Extract = (props) => {
                         key={item.id}
                         currentData={item}
                         currentIndex={index}
+                        onCopy={handleCopy}
                         onDelete={handleDelete}
                         onUpdateData={handleUpdateData}
                         isQuote={isQuote}

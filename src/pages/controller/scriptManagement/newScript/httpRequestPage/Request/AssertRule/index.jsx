@@ -48,6 +48,17 @@ const AssertRule = (props) => {
         })
     };
 
+    const handleCopy = (e, record) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setAssertData(prev => {
+            const newData = [...prev, { ...record, id: generateUUID() }];
+            updateTreeList([{ insertKey: 'assert_validators', insertValue: newData }]);
+
+            return newData;
+        });
+    };
+
     const handleDelete = (e, record) => {
         e.preventDefault();
         e.stopPropagation();
@@ -92,6 +103,7 @@ const AssertRule = (props) => {
                         key={item.id}
                         currentData={item}
                         currentIndex={index}
+                        onCopy={handleCopy}
                         onDelete={handleDelete}
                         onUpdateData={handleUpdateData}
                         isQuote={isQuote}

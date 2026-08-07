@@ -43,6 +43,17 @@ const AssertRule = (props) => {
         })
     };
 
+    const handleCopy = (e, record) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setAssertData(prev => {
+            const newData = [...prev, { ...record, id: generateUUID() }];
+
+            updateInterfaceInfo('assert_validators', newData);
+            return newData;
+        });
+    };
+
     const handleDelete = (e, record) => {
         e.preventDefault();
         e.stopPropagation();
@@ -87,6 +98,7 @@ const AssertRule = (props) => {
                         key={item.id}
                         currentData={item}
                         currentIndex={index}
+                        onCopy={handleCopy}
                         onDelete={handleDelete}
                         onUpdateData={handleUpdateData}
                     />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, Form, Input, Select, Button, Tag, Radio } from 'antd';
+import { Collapse, Form, Input, Select, Button, Tag, Radio, Popover } from 'antd';
 import styles from './index.less';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, CopyOutlined } from '@ant-design/icons';
 import { AssertType, SourceOption } from '@/pages/controller/common';
 
 const { Panel } = Collapse;
@@ -11,6 +11,7 @@ const AssertCollapse = (props) => {
     const {
         currentData,
         currentIndex,
+        onCopy,
         onDelete,
         onUpdateData
     } = props;
@@ -28,7 +29,6 @@ const AssertCollapse = (props) => {
     const assertType = [...AssertType];
 
     useEffect(() => {
-        console.log(currentData);
         setNameVal(currentData?.name || undefined);
         setSourceVal(currentData?.source || undefined);
         setExpressionVal(currentData?.expr || undefined);
@@ -50,7 +50,10 @@ const AssertCollapse = (props) => {
                     （{expressionVal ? <Tag color="processing" >{expressionVal}</Tag> : <span></span>}）
                 </div>
                 <div className={styles['button-group']}>
-                    <Button type="link" icon={<DeleteOutlined />} onClick={(e) => onDelete(e, currentData)} ></Button>
+                    <Popover content="复制">
+                        <Button type="link" icon={<CopyOutlined />} onClick={(e) => onCopy(e, currentData)} />
+                    </Popover>
+                    <Button type="link" icon={<DeleteOutlined />} onClick={(e) => onDelete(e, currentData)} />
                 </div>
             </div>
         )

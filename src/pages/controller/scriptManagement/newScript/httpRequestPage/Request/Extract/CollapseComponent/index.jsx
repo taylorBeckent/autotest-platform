@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Collapse, Form, Input, Select, Button, Tag, Radio, InputNumber } from 'antd';
+import { Collapse, Form, Input, Select, Button, Tag, Radio, InputNumber, Popover } from 'antd';
 import styles from './index.less';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, CopyOutlined } from '@ant-design/icons';
 
 const { Panel } = Collapse;
 const { Option } = Select;
@@ -10,6 +10,7 @@ const CollapseComponent = (props) => {
     const {
         currentData,
         currentIndex,
+        onCopy,
         onDelete,
         onUpdateData,
         isQuote
@@ -80,6 +81,9 @@ const CollapseComponent = (props) => {
                     （{expressionVal ? <Tag color="processing" >{expressionVal}</Tag> : <span></span>}）
                 </div>
                 <div className={styles['button-group']}>
+                    <Popover content="复制">
+                        <Button type="link" icon={<CopyOutlined />} onClick={(e) => onCopy(e, currentData)} />
+                    </Popover>
                     <Button type="link" icon={<DeleteOutlined />} onClick={(e) => onDelete(e, currentData)} ></Button>
                 </div>
             </div>

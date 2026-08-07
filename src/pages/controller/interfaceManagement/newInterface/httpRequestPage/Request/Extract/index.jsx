@@ -41,6 +41,17 @@ const Extract = (props) => {
         })
     };
 
+    const handleCopy = (e, record) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setExtractData(prev => {
+            const newData = [...prev, { ...record, id: generateUUID() }];
+            
+            updateInterfaceInfo('extract_variables', newData);
+            return newData;
+        });
+    };
+
     //. 删除行
     const handleDelete = (e, record) => {
         e.preventDefault();
@@ -90,6 +101,7 @@ const Extract = (props) => {
                         key={item.id}
                         currentData={item}
                         currentIndex={index}
+                        onCopy={handleCopy}
                         onDelete={handleDelete}
                         onUpdateData={handleUpdateData}
                     />
@@ -105,4 +117,3 @@ export default connect(({ scriptManagement, interfaceManagement }) => ({
     scriptManagement,
     interfaceManagement
 }))(Extract);
-// export default Extract;
