@@ -58,25 +58,25 @@ const EnvManagement = (props) => {
         {
             title: '节点类型',
             key: 'env_type',
-            dataIndex: 'env_type',
+            dataIndex: 'DB',
             align: 'center',
             ellipsis: true,
             width: 300,
-            render: text => {
-                let str;
-                switch (text) {
-                    case 1:
-                        str = 'APP';
-                        break;
-                    case 2:
-                        str = 'FILE';
-                        break;
-                    case 3:
-                        str = 'DB';
-                        break;
-                }
-                return (<div>{str}</div>)
-            }
+            // render: text => {
+            //     let str;
+            //     switch (text) {
+            //         case 1:
+            //             str = 'APP';
+            //             break;
+            //         case 2:
+            //             str = 'FILE';
+            //             break;
+            //         case 3:
+            //             str = 'DB';
+            //             break;
+            //     }
+            //     return (<div>{str}</div>)
+            // }
         },
         {
             title: '操作',
@@ -97,10 +97,10 @@ const EnvManagement = (props) => {
                             <Button type="link" icon={<DeleteOutlined />} />
                         </Popconfirm>
                     ) : (
-                            <Popover content="该节点下存在子节点数据，不可删除" placement="topRight" >
-                                <Button type="link" icon={<DeleteOutlined />} disabled={!record?.is_delete} />
-                            </Popover>
-                        )}
+                        <Popover content="该节点下存在子节点数据，不可删除" placement="topRight" >
+                            <Button type="link" icon={<DeleteOutlined />} disabled={!record?.is_delete} />
+                        </Popover>
+                    )}
 
                 </Button.Group >
             )
@@ -264,9 +264,9 @@ const EnvManagement = (props) => {
                                 placeholder="请选择节点类型"
                                 onChange={e => setNodeTypeVal(e)}
                             >
-                                <Option key="1" value="1" >APP</Option>
-                                <Option key="2" value="2" >FILE</Option>
-                                <Option key="3" value="3" >DB</Option>
+                                <Option key="APP" value="APP" >APP</Option>
+                                <Option key="FILE" value="FILE" >FILE</Option>
+                                <Option key="DB" value="DB" >DB</Option>
                             </Select>
                         </Form.Item>
                     </Col>
@@ -291,7 +291,7 @@ const EnvManagement = (props) => {
                 rowKey={record => { return (record.id + record.uuid) }}
                 scroll={{ x: '0%' }}
                 expandedRowRender={(record, index, indent, expanded) => {
-                    if (record.env_type === 1 || record.env_type === 2) {
+                    if (record.env_type === "APP" || record.env_type === "FILE") {
                         return (
                             <ChildTable
                                 dispatch={dispatch}
@@ -305,7 +305,7 @@ const EnvManagement = (props) => {
                             // conditionsBackUp={conditionsBackUp}
                             />
                         )
-                    } else if (record.env_type === 3) {
+                    } else if (record.env_type === "DB") {
                         return (
                             <DBChild
                                 dispatch={dispatch}
@@ -393,9 +393,9 @@ const EnvManagement = (props) => {
                                         placeholder="请选择节点类型"
                                         onChange={e => setNodeTypeVal(e)}
                                     >
-                                        <Option key={1} value={1} >APP</Option>
-                                        <Option key={2} value={2} >FILE</Option>
-                                        <Option key={3} value={3} >DB</Option>
+                                        <Option key="APP" value="APP" >APP</Option>
+                                        <Option key="FILE" value="FILE" >FILE</Option>
+                                        <Option key="DB" value="DB" >DB</Option>
                                     </Select>
                                 </Form.Item>
                             </Col>

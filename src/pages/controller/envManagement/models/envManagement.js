@@ -248,7 +248,7 @@ export default {
             if (code == '000000') {
                 let newData = JSON.parse(JSON.stringify(tableData));
                 newData.map(item => {
-                    if (payload.env_info_id === item.project_id && payload.env === item.env_name && item.env_type === 1) {
+                    if (payload.env_info_id === item.project_id && payload.env === item.env_name && item.env_type === "APP") {
                         item.is_delete = false;
                     }
                 })
@@ -273,7 +273,7 @@ export default {
             if (code == '000000') {
                 let newData = JSON.parse(JSON.stringify(tableData));
                 newData.map(item => {
-                    if (payload.env_info_id === item.project_id && payload.env === item.env_name && item.env_type === 2) {
+                    if (payload.env_info_id === item.project_id && payload.env === item.env_name && item.env_type === "FILE") {
                         item.is_delete = false;
                     }
                 })
@@ -298,7 +298,7 @@ export default {
             if (code == '000000') {
                 let newData = JSON.parse(JSON.stringify(tableData));
                 newData.map(item => {
-                    if (payload.env_info_id === item.project_id && payload.env === item.env_name && item.env_type === 3) {
+                    if (payload.env_info_id === item.project_id && payload.env === item.env_name && item.env_type === "DB") {
                         item.is_delete = false;
                     }
                 })

@@ -23,9 +23,9 @@ const AddCaseModal = (props) => {
             // let ipHost = currentRecord?.ip ? extractIP(currentRecord?.ip) : undefined;
             form.setFieldsValue({ 'configName': currentRecord?.config_name, 'env_host': currentRecord?.ip, 'env_port': currentRecord?.port, 'remarks': currentRecord?.remark });
 
-            if (currentRecord?.env_type === 2) {
+            if (currentRecord?.env_type === "FILE") {
                 form.setFieldsValue({ 'account': currentRecord?.server_account, 'password': currentRecord?.server_password, 'passwordByPass': currentRecord?.is_no_password.toString() });
-            } else if (currentRecord?.env_type === 3) {
+            } else if (currentRecord?.env_type === "DB") {
                 form.setFieldsValue({ 'databaseType': currentRecord?.db_type, 'databaseName': currentRecord?.db_name, 'account': currentRecord?.db_user, 'password': currentRecord?.db_password });
             }
         }
@@ -53,10 +53,10 @@ const AddCaseModal = (props) => {
                 operation: '1',
             };
 
-            if (nodeType === 1) { //. APP
+            if (nodeType === "APP") { //. APP
                 params.env_host = form.getFieldValue('env_host');
                 params.env_port = form.getFieldValue('env_port');
-            } else if (nodeType === 2) { //. FILE
+            } else if (nodeType === "FILE") { //. FILE
                 params.server_ip = form.getFieldValue('env_host');
                 params.server_port = form.getFieldValue('env_port');
                 params.server_account = form.getFieldValue('account');
@@ -114,7 +114,7 @@ const AddCaseModal = (props) => {
                         </Col>
                     </Row>
 
-                    {nodeType == 3 && (
+                    {nodeType == "DB" && (
                         <>
                             <Row>
                                 <Col span={24}>
@@ -184,7 +184,7 @@ const AddCaseModal = (props) => {
                         </Col>
                     </Row>
 
-                    {(nodeType == 2 || nodeType == 3) && (
+                    {(nodeType == "FILE" || nodeType == "DB") && (
                         <div>
                             <Row>
                                 <Col span={24}>
@@ -208,7 +208,7 @@ const AddCaseModal = (props) => {
                         </div>
                     )}
 
-                    {nodeType == 2 && (
+                    {nodeType == "FILE" && (
                         <Row>
                             <Col span={24}>
                                 <Form.Item labelCol={{ span: 7 }} wrapperCol={{ span: 16 }} label="是否免密" name="passwordByPass"
@@ -229,15 +229,15 @@ const AddCaseModal = (props) => {
 }
 
 const nodeTypeMapAdd = {
-    '1': 'AppAdd',
-    '2': 'FileAdd',
-    '3': 'DbAdd'
+    'APP': 'AppAdd',
+    'FILE': 'FileAdd',
+    'DB': 'DbAdd'
 };
 
 const nodeTypeMapUpdate = {
-    '1': 'AppUpdate',
-    '2': 'FileUpdate',
-    '3': 'DbUpdate'
+    'APP': 'AppUpdate',
+    'FILE': 'FileUpdate',
+    'DB': 'DbUpdate'
 };
 
 export default connect(({ envManagement }) => ({
