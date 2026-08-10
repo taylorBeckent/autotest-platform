@@ -58,7 +58,7 @@ const EnvManagement = (props) => {
         {
             title: '节点类型',
             key: 'env_type',
-            dataIndex: 'DB',
+            dataIndex: 'env_type',
             align: 'center',
             ellipsis: true,
             width: 300,

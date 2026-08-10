@@ -300,7 +300,7 @@ const VariableTable = (props) => {
     //. 批量导入内容提示框
     const editContent = (
         <div>
-            <Card title="批量导入" size="small" extra={<CloseOutlined style={{ cursor: 'pointer', fontSize: 17 }} onClick={() => { setBatchStatus(false) }} />} >
+            <Card title="批量导入" size="small" extra={<CloseOutlined style={{ cursor: 'pointer', ontSize: 16, color: "#8b8b8b"  }} onClick={() => { setBatchStatus(false) }} />} >
                 <TextArea
                     style={{ width: '100%' }}
                     placeholder={"请检查导入数据为键值对的格式，例如： \r\r key1: value1 \r key2: value2"}
