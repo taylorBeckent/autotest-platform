@@ -51,6 +51,7 @@ const ScriptManagement = (props) => {
     const sorterInfoRef = useRef();
     const updatedTimeRef = useRef('descend');
     const caseLastTimeRef = useRef('descend');
+    const [paramsCache, setParamsCache] = useState({});
 
     useEffect(() => {
 
@@ -559,17 +560,24 @@ const ScriptManagement = (props) => {
             }
         }
 
+        let params = {
+            case_name: form.getFieldValue('scriptName'),
+            case_project: applicationId || undefined,
+            case_tags: (Array.isArray(allCheckValues) && allCheckValues.length > 0) ? tagListTransform(allCheckValues) : [],
+            case_types: ['用户脚本', '公共脚本'],
+            page,
+            page_size: size,
+            order
+        };
+
+        setParamsCache(prev => ({
+            ...prev,
+            ...params
+        }))
+
         dispatch({
             type: 'scriptManagement/CaseSearch',
-            params: {
-                case_name: form.getFieldValue('scriptName'),
-                case_project: applicationId || undefined,
-                case_tags: (Array.isArray(allCheckValues) && allCheckValues.length > 0) ? tagListTransform(allCheckValues) : [],
-                case_types: ['用户脚本', '公共脚本'],
-                page,
-                page_size: size,
-                order
-            }
+            params
         })
     };
 
@@ -748,10 +756,12 @@ const ScriptManagement = (props) => {
                     <Button type='primary' style={{ marginRight: '10px' }} onClick={() => { console.log(selectedRowKeys) }} >脚本转让</Button>
 
                     <Button type='primary' onClick={() => {
+                        console.log('paramsCache', paramsCache);
                         props.history.push({
                             pathname: '/controller/scriptManagement/newScript',
                             query: {
-                                actionMode: 'add'
+                                actionMode: 'add',
+                                paramsCache
                             }
                         })
                     }}>新增</Button>
